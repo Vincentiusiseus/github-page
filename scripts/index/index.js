@@ -1,1 +1,1 @@
-alert("Hello from index/index.js")
+console.log("Hello from index/index.js")

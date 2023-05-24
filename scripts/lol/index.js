@@ -1,1 +1,1 @@
-alert("Hello from lol/index.js")
+console.log("Hello from lol/index.js")
