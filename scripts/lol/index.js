@@ -1,0 +1,1 @@
+alert("Hello from lol/index.js")
