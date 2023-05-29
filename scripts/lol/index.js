@@ -3,7 +3,6 @@ console.log("Hello from lol/index.js")
 window.addEventListener("DOMContentLoaded", () => {
     const api_container = document.getElementById("api-container")
     const api_input_comp_temp = api_container.querySelector("template")
-    console.log(api_input_comp_temp)
 
     function removeApiInputComp() {
         const comp = this.closest(".api-input-comp")
@@ -12,11 +11,15 @@ window.addEventListener("DOMContentLoaded", () => {
 
     function addApiInputComp() {
         const list = api_container.querySelector("#api-key-list")
-        console.log(api_input_comp_temp)
         const cloned_comp = api_input_comp_temp.content.cloneNode(true)
 
         const remove_button = cloned_comp.querySelector("button")
         remove_button.addEventListener("click", removeApiInputComp)
+
+        const input_el = cloned_comp.querySelector("input")
+        input_el.addEventListener("input", (ev) => {
+            console.log(ev, ev.target.value)
+        })
 
         list.appendChild(cloned_comp)
     }
