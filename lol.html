@@ -8,10 +8,20 @@
     <script src="scripts/lol/index.js"></script>
 </head>
 <body>
-    <div>
-        <b>API keys</b>
+    <div id="api-container">
         <div>
-            <input type="text">
+            <b>API keys</b>
+            <button id="add-api-comp-button">+</button>
+        </div>
+        <div id="api-keys">
+            <div id="api-key-list">
+            </div>
+            <template>
+                <div class="api-input-comp">
+                    <input type="text">
+                    <button>-</button>
+                </div>
+            </template>
         </div>
     </div>
 
