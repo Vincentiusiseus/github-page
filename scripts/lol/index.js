@@ -40,8 +40,11 @@ window.addEventListener("DOMContentLoaded", async () => {
         const req = transaction.add("")
         req.onsuccess = (ev) => {
             const key = ev.target.result
-            const value = db.transaction("api_keys", "readonly").objectStore("api_keys").get(key)
-            addApiInputComp(key, value)
+            const req = db.transaction("api_keys", "readonly").objectStore("api_keys").get(key)
+            req.onsuccess = (ev) => {
+                const value = ev.target.result
+                addApiInputComp(key, value)
+            }
         }
     }
 
