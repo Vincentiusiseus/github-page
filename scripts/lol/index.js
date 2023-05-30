@@ -9,7 +9,16 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     function removeApiInputComp() {
         const comp = this.closest(".api-input-comp")
-        comp.remove()
+        const store_key = comp.dataset.storeKey
+        const transaction = db.transaction("api_keys", "readwrite").objectStore("api_keys")
+        const req = transaction.delete(Number(store_key))
+        req.onerror = (event) => {
+            console.log("On error", event)
+        }
+        req.onsuccess = (event) => {
+            console.log(`Removed entry with key ${store_key}`)
+            comp.remove()
+        }
     }
 
     function addApiInputComp(store_key, api_key) {
@@ -19,9 +28,11 @@ window.addEventListener("DOMContentLoaded", async () => {
         const remove_button = cloned_comp.querySelector("button")
         remove_button.addEventListener("click", removeApiInputComp)
 
+        const div_el = cloned_comp.querySelector(".api-input-comp")
+        div_el.dataset.storeKey = store_key
+
         const input_el = cloned_comp.querySelector("input")
         input_el.value = api_key
-        input_el.dataset.storeKey = store_key
         input_el.addEventListener("input", (ev) => {
             console.log(ev, ev.target.value)
             const new_value = ev.target.value
